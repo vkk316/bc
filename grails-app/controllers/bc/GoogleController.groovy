@@ -4,6 +4,7 @@ import grails.plugin.springsecurity.rest.token.AccessToken
 import grails.rest.*
 import grails.converters.*
 import org.apache.http.HttpStatus
+import org.springframework.security.core.context.SecurityContextHolder
 
 class GoogleController {
     def appUserDetailsService
@@ -44,11 +45,10 @@ class GoogleController {
         //create and store API access token, whatever your token generation and storage strategy may be,
         //this will work (ie JWT, GORM, etc)
         AccessToken accessToken = tokenGenerator.generateAccessToken(userDetails)
-        tokenStorageService.storeToken(accessToken, userDetails)
+        tokenStorageService.storeToken(accessToken.accessToken, userDetails)
 
         //authenticationEventPublisher.publishTokenCreation(accessToken)
-
-        //SecurityContextHolder.context.setAuthentication(accessToken)
+        SecurityContextHolder.context.setAuthentication(accessToken)
 
         render contentType: 'application/json', encoding: 'UTF-8', text: accessTokenJsonRenderer.generateJson(accessToken)
     }
