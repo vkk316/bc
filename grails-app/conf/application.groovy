@@ -3,8 +3,8 @@ grails.gorm.default.constraints = {
 }
 
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'bc.User'
-grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'bc.UserRole'
-grails.plugin.springsecurity.authority.className = 'bc.Role'
+grails.plugin.springsecurity.rest.token.rendering.usernamePropertyName = 'login'
+grails.plugin.springsecurity.rest.token.rendering.authoritiesPropertyName = 'permissions'
 grails.plugin.springsecurity.authority.groupAuthorityNameField = 'authorities'
 grails.plugin.springsecurity.securityConfigType = "Annotation"
 

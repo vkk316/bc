@@ -3,7 +3,7 @@ package bc
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class RoleSpec extends Specification implements DomainUnitTest<Role> {
+class ParticipantSpec extends Specification implements DomainUnitTest<Participant> {
 
     def setup() {
     }

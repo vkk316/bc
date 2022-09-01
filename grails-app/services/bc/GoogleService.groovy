@@ -27,7 +27,6 @@ class GoogleService {
 
     boolean isTokenForApp(String token) {
         def resp = client.get(query: [access_token: token])
-
         resp.status == 200
     }
 }
