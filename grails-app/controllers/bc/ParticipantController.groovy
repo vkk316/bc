@@ -14,7 +14,20 @@ class ParticipantController {
     SpringSecurityService springSecurityService
 
     def index() {
-        render contentType: 'application/json', encoding: 'UTF-8', text: springSecurityService.getCurrentUserId()
+        def result = [valid: false]
+        try {
+            def user = User.findById(springSecurityService.getCurrentUserId() as Long)
+            def instance = Participant.findById(user.participant.id)
+            if (instance.hasErrors()) {
+                respond instance.errors
+                return
+            }
+            result.data = instance
+            result.valid = true
+        } catch (error) {
+            result.reason = error.message
+        }
+        render(result as JSON)
     }
 
     @Transactional
